@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Global Trend Hub — discover interesting topics from around the world.">
+<title>Global Trend Hub</title>
+<style>
+:root{--bg:#07080d;--card:#10131c;--line:#262b39;--text:#f8fafc;--muted:#99a2b2;--a:#7c5cff;--b:#ff3f78;--c:#18c8ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:
+radial-gradient(circle at 10% 10%,rgba(124,92,255,.18),transparent 25%),
+radial-gradient(circle at 90% 20%,rgba(255,63,120,.14),transparent 24%),
+radial-gradient(circle at 50% 90%,rgba(24,200,255,.09),transparent 30%)}
+.bg-orb{position:fixed;border-radius:50%;filter:blur(65px);opacity:.18;z-index:-1;pointer-events:none}
+.one{width:300px;height:300px;background:#7c5cff;left:-120px;top:25%;animation:move1 18s infinite alternate ease-in-out}
+.two{width:280px;height:280px;background:#ff3f78;right:-100px;top:55%;animation:move2 21s infinite alternate ease-in-out}
+.three{width:220px;height:220px;background:#18c8ff;left:45%;bottom:-100px;animation:move3 16s infinite alternate ease-in-out}
+@keyframes move1{to{transform:translate(260px,-100px) scale(1.2)}}
+@keyframes move2{to{transform:translate(-220px,120px) scale(.8)}}
+@keyframes move3{to{transform:translate(100px,-180px) scale(1.3)}}
+
+.wrap{width:min(1080px,calc(100% - 26px));margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(7,8,13,.8);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav{height:66px;display:flex;align-items:center}
+.logo{font-size:20px;font-weight:950;letter-spacing:-.7px}
+.logo span{color:#ff3f78}
+.world{margin-left:auto;font-size:11px;font-weight:900;color:#aeb7c7;border:1px solid #303645;border-radius:999px;padding:8px 11px}
+.hero{text-align:center;padding:65px 0 35px}
+.kicker{display:inline-block;border:1px solid #3a3152;background:#100d19;color:#d7ceff;border-radius:999px;padding:8px 13px;font-size:11px;font-weight:900}
+h1{font-size:clamp(42px,8vw,78px);line-height:.92;letter-spacing:-4px;margin:19px 0 15px}
+.gradient{background:linear-gradient(100deg,#fff,#ff5b89,#9b82ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:680px;margin:auto;color:var(--muted);font-size:16px;line-height:1.65}
+
+.panel{margin:20px auto 0;padding:22px;border:1px solid #282e3d;border-radius:22px;background:rgba(13,16,24,.78);box-shadow:0 25px 70px rgba(0,0,0,.22)}
+.panel-title{font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:1.2px;color:#ff7596;margin-bottom:15px}
+.buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.btn{position:relative;overflow:hidden;min-height:56px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #303747;border-radius:13px;background:linear-gradient(135deg,#141925,#0d1017);font-size:13px;font-weight:900;transition:.2s}
+.btn:after{content:"";position:absolute;top:0;left:-90%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:skewX(-20deg);transition:.55s}
+.btn:hover:after{left:140%}
+.btn:hover{transform:translateY(-4px);border-color:#5c6578;box-shadow:0 14px 32px rgba(0,0,0,.32)}
+.btn:active{transform:scale(.97)}
+.btn.hot{background:linear-gradient(120deg,#ff3f78,#9a58ff);border-color:transparent}
+.btn.blue{background:linear-gradient(120deg,#10232c,#111721)}
+.btn.green{background:linear-gradient(120deg,#10231d,#111721)}
+.btn.gold{background:linear-gradient(120deg,#282013,#141721)}
+
+.trending{margin-top:34px}
+.head{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}
+.head h2{font-size:25px;margin:0}.head span{font-size:12px;color:#717b8c}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.card{padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--card);transition:.2s}
+.card:hover{transform:translateY(-5px);border-color:#4b5568}
+.icon{height:110px;border-radius:16px;background:linear-gradient(135deg,#171c28,#0d1119);display:grid;place-items:center;font-size:55px;margin-bottom:14px}
+.tag{color:#ff718f;font-size:10px;text-transform:uppercase;font-weight:950;letter-spacing:1px}
+.card h3{font-size:18px;line-height:1.2;margin:6px 0}
+.card p{color:#8e98a9;font-size:13px;line-height:1.5;margin:0}
+
+.bottom{margin:30px 0 45px;padding:30px;text-align:center;border:1px solid #34283c;border-radius:23px;background:linear-gradient(120deg,rgba(255,63,120,.12),rgba(124,92,255,.11)),#0e1119}
+.bottom h2{font-size:30px;margin:0 0 8px}.bottom p{color:#929baa;max-width:600px;margin:0 auto 18px}
+.maincta{display:inline-block;padding:16px 30px;border-radius:12px;background:linear-gradient(100deg,#ff3f78,#8b5cff);font-weight:950;box-shadow:0 12px 35px rgba(255,63,120,.2);transition:.2s}
+.maincta:hover{transform:translateY(-3px)}
+.note{font-size:11px;color:#687284;margin-top:9px}
+footer{text-align:center;color:#5d6676;font-size:12px;padding-bottom:40px}
+
+@media(max-width:800px){.buttons{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:550px){.wrap{width:min(100% - 20px,1080px)}h1{letter-spacing:-2.5px}.buttons{grid-template-columns:1fr 1fr;gap:8px}.btn{min-height:52px;font-size:12px}.cards{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+.image-card{position:relative;overflow:hidden;height:190px;border-radius:17px;margin-bottom:14px;background:#121722}
+.image-card img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .55s ease,filter .35s ease}
+.card:hover .image-card img{transform:scale(1.08);filter:saturate(1.12) brightness(1.06)}
+.image-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,6,10,.72),transparent 55%);pointer-events:none}
+.image-badge{position:absolute;left:11px;bottom:10px;z-index:1;padding:6px 9px;border-radius:999px;background:rgba(5,6,10,.68);border:1px solid rgba(255,255,255,.16);font-size:10px;font-weight:900;backdrop-filter:blur(8px)}
+
+
+/* Country / language selector */
+.locale-bar{margin:0 auto 28px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.locale-label{font-size:12px;font-weight:900;color:#aab3c3}
+.country-select{min-width:270px;max-width:100%;padding:12px 42px 12px 14px;border:1px solid #343b4b;border-radius:13px;background:#10141d;color:#fff;font-weight:800;outline:none;cursor:pointer}
+.country-select:focus{border-color:#8b5cff;box-shadow:0 0 0 3px rgba(139,92,255,.14)}
+.lang-chip{padding:9px 12px;border:1px solid #303747;border-radius:999px;background:#0e121a;color:#b9c2d1;font-size:11px;font-weight:900}
+.direction-rtl{direction:rtl}
+.image-link{display:block;position:relative}
+.image-link:after{content:"EXPLORE →";position:absolute;right:11px;bottom:11px;z-index:2;padding:7px 9px;border-radius:999px;background:rgba(0,0,0,.68);color:#fff;font-size:9px;font-weight:950;letter-spacing:.6px;opacity:0;transform:translateY(5px);transition:.22s}
+.image-link:hover:after{opacity:1;transform:translateY(0)}
+
+
+.local-pulse{margin:8px 0 30px}.pulse-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:14px}.pulse-head h2{margin:0;font-size:27px}.pulse-head p{margin:4px 0 0;color:#7f899a;font-size:12px}.live-pill{padding:7px 10px;border:1px solid #343b4b;border-radius:999px;background:#0d1119;color:#bfc7d4;font-size:10px;font-weight:900}.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#38e68a;margin-right:6px;box-shadow:0 0 12px #38e68a}.pulse-grid{display:grid;grid-template-columns:1.35fr .85fr .85fr;gap:13px}.story,.mini-story{position:relative;overflow:hidden;border:1px solid #2a3040;background:#10141d}.story{min-height:260px;border-radius:20px}.mini-story{min-height:123px;border-radius:18px}.story:hover,.mini-story:hover{transform:translateY(-4px);border-color:#555e72}.story-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.72}.story-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,7,12,.96),rgba(5,7,12,.08) 70%)}.story-content{position:absolute;left:17px;right:17px;bottom:17px}.mini-story .story-content{left:13px;right:13px;bottom:13px}.story-kicker{font-size:9px;font-weight:950;text-transform:uppercase;color:#ff7795;letter-spacing:1px}.story h3{font-size:20px;line-height:1.16;margin:6px 0}.mini-story h3{font-size:15px;margin:4px 0}.story p{margin:0;color:#a7afbd;font-size:12px;line-height:1.45}.story-btn{display:inline-block;margin-top:10px;padding:7px 9px;border-radius:9px;background:rgba(255,255,255,.1);font-size:10px;font-weight:900}.local-note{margin-top:9px;color:#667082;font-size:10px;line-height:1.4}@media(max-width:850px){.pulse-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.pulse-grid{grid-template-columns:1fr}.pulse-head{align-items:flex-start;flex-direction:column}}
+
+.people-directory{margin:30px 0}.people-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.people-tab{border:1px solid #2c3342;background:#10141d;color:#aeb7c7;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:900;cursor:pointer}.people-tab.active{background:#f1f4f8;color:#11151c}.people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.person-card{position:relative;overflow:hidden;min-height:220px;border:1px solid #2a3040;border-radius:18px;background:#10141d;transition:.22s}.person-card:hover{transform:translateY(-4px);border-color:#5b6476}.person-card img{width:100%;height:145px;object-fit:cover;display:block}.person-info{padding:10px 12px}.person-name{font-size:15px;font-weight:950}.person-meta{font-size:10px;color:#8993a4;margin-top:4px}.person-card a{display:block;color:inherit;text-decoration:none}@media(max-width:900px){.people-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:500px){.people-grid{grid-template-columns:1fr 1fr}.person-card{min-height:190px}.person-card img{height:120px}}
+
+</style>
+</head>
+<body>
+<div class="bg-orb one"></div><div class="bg-orb two"></div><div class="bg-orb three"></div>
+
+<header><div class="wrap nav">
+  <div class="logo">GLOBAL <span>TREND HUB</span></div>
+  <div class="world">🌍 WORLDWIDE</div>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+  <div class="kicker">🔥 THE GLOBAL CURIOSITY HUB</div>
+  <h1>Discover What's<br><span class="gradient">Worth Exploring.</span></h1>
+  <p>Viral moments, technology, sports, entertainment, curious discoveries and more — all in one visual destination.</p>
+
+
+<div class="locale-bar">
+  <span class="locale-label" id="localeLabel">🌍 Choose your country</span>
+  <select id="countrySelect" class="country-select" aria-label="Choose your country"></select>
+  <span id="langChip" class="lang-chip">Language: English</span>
+</div>
+
+  <div class="panel">
+    <div class="panel-title">✨ Explore a topic</div>
+    <div class="buttons">
+      <a class="btn hot" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">✨ Reveal</a>
+      <a class="btn" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🔥 All Trends</a>
+      <a class="btn" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🚀 Viral</a>
+      <a class="btn blue" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🤖 AI & Tech</a>
+      <a class="btn green" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🏆 Sports</a>
+      <a class="btn" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🎬 Entertainment</a>
+      <a class="btn gold" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🤯 Curious</a>
+      <a class="btn" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">✨ Lifestyle</a>
+      <a class="btn" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">😂 Funny</a>
+      <a class="btn blue" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🧠 Science</a>
+      <a class="btn" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">🌎 World</a>
+      <a class="btn hot" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">⚡ Trending Now</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="local-pulse" id="localPulse">
+<div class="pulse-head"><div><h2 id="pulseTitle">🔥 Local Pulse</h2><p id="pulseSubtitle">Interesting topics selected for your country.</p></div><div class="live-pill"><span class="live-dot"></span><span id="pulseCountry">Worldwide</span></div></div>
+<div class="pulse-grid" id="pulseGrid"></div>
+<div class="local-note">This section is personalized by selected country. For truly current headlines, connect it to a verified news feed/API.</div>
+</section>
+
+<section class="people-directory" id="peopleDirectory">
+  <div class="head"><div><h2>🌟 People Universe</h2><p class="sub">Explore popular footballers, cricketers and actors.</p></div></div>
+  <div class="people-tabs">
+    <button class="people-tab active" data-type="football">⚽ Football</button>
+    <button class="people-tab" data-type="cricket">🏏 Cricket</button>
+    <button class="people-tab" data-type="actors">🎬 Actors</button>
+  </div>
+  <div class="people-grid" id="peopleGrid"></div>
+  <p class="local-note">Discovery cards are not a claim of a current popularity ranking. Check image licensing before commercial reuse.</p>
+</section>
+
+<section class="trending">
+  <div class="head"><h2>🔥 What's Interesting</h2><span>Pick a topic above to explore</span></div>
+  <div class="cards">
+    <article class="card"><a class="image-link" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener"><div class="image-card"><img src="https://storage.googleapis.com/latination-website-bucket-new/uploads/d95fe344-the-viral-tiktok-trends-taking-over-february-2026-and-how-you-can-join-them-today-1200x800.jpg" alt="Viral social media trend visual" loading="lazy"><span class="image-badge">🔥 VIRAL</span></div></a><div class="tag">Viral</div><h3>The moments people can't stop talking about</h3><p>Unexpected stories, internet culture and attention-grabbing moments.</p></article>
+    <article class="card"><a class="image-link" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener"><div class="image-card"><img src="https://thuongtruong-fileserver.nvcms.net/IMAGES/2026/02/26/20260226222836-1072ai-.png" alt="Futuristic artificial intelligence visual" loading="lazy"><span class="image-badge">🤖 AI & TECH</span></div></a><div class="tag">Technology</div><h3>AI and technology are moving fast</h3><p>Ideas and developments changing the way we use technology.</p></article>
+    <article class="card"><a class="image-link" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener"><div class="image-card"><img src="https://res.cloudinary.com/jerrick/image/upload/c_scale%2Cf_jpg%2Cq_auto/63e9f4602b2d86001c5b406e.png" alt="Colorful cosmic curiosity visual" loading="lazy"><span class="image-badge">🤯 CURIOUS</span></div></a><div class="tag">Curious</div><h3>Things that make you look twice</h3><p>Strange facts, mysteries and discoveries worth exploring.</p></article>
+    <article class="card"><a class="image-link" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener"><div class="image-card"><img src="https://www.united-2026.com/_next/image?dpl=dpl_8btTwtz2iJERRwqizTyBb1G2k7eH&q=90&url=%2Fimages%2Fheroes%2Fmatches-page.webp&w=3840" alt="Football stadium and fans" loading="lazy"><span class="image-badge">🏆 SPORTS</span></div></a><div class="tag">Sports</div><h3>Big games and bigger reactions</h3><p>Discover sports topics and moments attracting attention.</p></article>
+    <article class="card"><a class="image-link" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener"><div class="image-card"><img src="https://www.artistdirect.com/news/images/2026-06-26-charli-xcx-unveils-wink-wink-ahead-of-july-24-album-music-fashion-film.webp" alt="Neon music and entertainment visual" loading="lazy"><span class="image-badge">🎬 ENTERTAINMENT</span></div></a><div class="tag">Entertainment</div><h3>Movies, music and pop culture</h3><p>Interesting entertainment topics from around the world.</p></article>
+    <article class="card"><a class="image-link" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener"><div class="image-card"><img src="https://images.myguide-cdn.com/venice/activities/murano-glass-factory-burano-lace-shop-torcello/large/murano-glass-factory-burano-lace-shop-torcello-7314598.jpg" alt="Colorful travel destination" loading="lazy"><span class="image-badge">✨ LIFESTYLE</span></div></a><div class="tag">Lifestyle</div><h3>Small discoveries, big curiosity</h3><p>Ideas, trends and everyday topics worth a closer look.</p></article>
+  </div>
+</section>
+
+
+<section class="trending" style="margin-top:28px">
+  <div class="head"><h2>👀 Visual Trend Wall</h2><span>Fresh-looking visuals grab attention fast</span></div>
+  <div class="cards">
+    <a class="card" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">
+      <div class="image-card"><img src="https://storage.googleapis.com/latination-website-bucket-new/uploads/d95fe344-the-viral-tiktok-trends-taking-over-february-2026-and-how-you-can-join-them-today-1200x800.jpg" alt="Viral trend visual" loading="lazy"><span class="image-badge">🔥 VIRAL</span></div>
+      <div class="tag">Scroll-stopper</div><h3>See what is getting attention</h3><p>Bright, visual stories are easier to scan while scrolling.</p>
+    </a>
+    <a class="card" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">
+      <div class="image-card"><img src="https://thuongtruong-fileserver.nvcms.net/IMAGES/2026/02/26/20260226222836-1072ai-.png" alt="AI technology visual" loading="lazy"><span class="image-badge">🤖 FUTURE</span></div>
+      <div class="tag">Tech</div><h3>Step into the future</h3><p>A visual doorway into AI and technology.</p>
+    </a>
+    <a class="card" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">
+      <div class="image-card"><img src="https://images.myguide-cdn.com/venice/activities/murano-glass-factory-burano-lace-shop-torcello/large/murano-glass-factory-burano-lace-shop-torcello-7314598.jpg" alt="Colorful travel lifestyle visual" loading="lazy"><span class="image-badge">🌎 EXPLORE</span></div>
+      <div class="tag">Lifestyle</div><h3>Find somewhere fascinating</h3><p>Colorful places and ideas invite exploration.</p>
+    </a>
+  </div>
+</section>
+
+<section class="bottom">
+  <h2>Ready to explore?</h2>
+  <p>Choose any topic and continue to discover interesting content.</p>
+  <a class="maincta" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener">Explore Now →</a>
+  <div class="note">Continuing may open advertising or promotional content.</div>
+</section>
+
+<footer>© 2026 Global Trend Hub · Worldwide curiosity feed</footer>
+</main>
+
+<script>
+const SMARTLINK = 'https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315';
+const countries = [['AF','🇦🇫','Afghanistan','fa','فارسی'],['AL','🇦🇱','Albania','sq','Shqip'],['DZ','🇩🇿','Algeria','ar','العربية'],['AD','🇦🇩','Andorra','ca','Català'],['AO','🇦🇴','Angola','pt','Português'],['AG','🇦🇬','Antigua and Barbuda','en','English'],['AR','🇦🇷','Argentina','es','Español'],['AM','🇦🇲','Armenia','hy','Հայերեն'],['AU','🇦🇺','Australia','en','English'],['AT','🇦🇹','Austria','de','Deutsch'],['AZ','🇦🇿','Azerbaijan','az','Azərbaycanca'],['BS','🇧🇸','Bahamas','en','English'],['BH','🇧🇭','Bahrain','ar','العربية'],['BD','🇧🇩','Bangladesh','bn','বাংলা'],['BB','🇧🇧','Barbados','en','English'],['BY','🇧🇾','Belarus','be','Беларуская'],['BE','🇧🇪','Belgium','nl','Nederlands'],['BZ','🇧🇿','Belize','en','English'],['BJ','🇧🇯','Benin','fr','Français'],['BT','🇧🇹','Bhutan','dz','རྫོང་ཁ'],['BO','🇧🇴','Bolivia','es','Español'],['BA','🇧🇦','Bosnia and Herzegovina','bs','Bosanski'],['BW','🇧🇼','Botswana','en','English'],['BR','🇧🇷','Brazil','pt','Português'],['BN','🇧🇳','Brunei','ms','Bahasa Melayu'],['BG','🇧🇬','Bulgaria','bg','Български'],['BF','🇧🇫','Burkina Faso','fr','Français'],['BI','🇧🇮','Burundi','fr','Français'],['CV','🇨🇻','Cabo Verde','pt','Português'],['KH','🇰🇭','Cambodia','km','ខ្មែរ'],['CM','🇨🇲','Cameroon','fr','Français'],['CA','🇨🇦','Canada','en','English'],['CF','🇨🇫','Central African Republic','fr','Français'],['TD','🇹🇩','Chad','fr','Français'],['CL','🇨🇱','Chile','es','Español'],['CN','🇨🇳','China','zh','中文'],['CO','🇨🇴','Colombia','es','Español'],['KM','🇰🇲','Comoros','ar','العربية'],['CG','🇨🇬','Republic of the Congo','fr','Français'],['CD','🇨🇩','DR Congo','fr','Français'],['CR','🇨🇷','Costa Rica','es','Español'],['CI','🇨🇮','Côte d’Ivoire','fr','Français'],['HR','🇭🇷','Croatia','hr','Hrvatski'],['CU','🇨🇺','Cuba','es','Español'],['CY','🇨🇾','Cyprus','el','Ελληνικά'],['CZ','🇨🇿','Czechia','cs','Čeština'],['DK','🇩🇰','Denmark','da','Dansk'],['DJ','🇩🇯','Djibouti','fr','Français'],['DM','🇩🇲','Dominica','en','English'],['DO','🇩🇴','Dominican Republic','es','Español'],['EC','🇪🇨','Ecuador','es','Español'],['EG','🇪🇬','Egypt','ar','العربية'],['SV','🇸🇻','El Salvador','es','Español'],['GQ','🇬🇶','Equatorial Guinea','es','Español'],['ER','🇪🇷','Eritrea','ti','ትግርኛ'],['EE','🇪🇪','Estonia','et','Eesti'],['SZ','🇸🇿','Eswatini','en','English'],['ET','🇪🇹','Ethiopia','am','አማርኛ'],['FJ','🇫🇯','Fiji','en','English'],['FI','🇫🇮','Finland','fi','Suomi'],['FR','🇫🇷','France','fr','Français'],['GA','🇬🇦','Gabon','fr','Français'],['GM','🇬🇲','Gambia','en','English'],['GE','🇬🇪','Georgia','ka','ქართული'],['DE','🇩🇪','Germany','de','Deutsch'],['GH','🇬🇭','Ghana','en','English'],['GR','🇬🇷','Greece','el','Ελληνικά'],['GD','🇬🇩','Grenada','en','English'],['GT','🇬🇹','Guatemala','es','Español'],['GN','🇬🇳','Guinea','fr','Français'],['GW','🇬🇼','Guinea-Bissau','pt','Português'],['GY','🇬🇾','Guyana','en','English'],['HT','🇭🇹','Haiti','fr','Français'],['HN','🇭🇳','Honduras','es','Español'],['HU','🇭🇺','Hungary','hu','Magyar'],['IS','🇮🇸','Iceland','is','Íslenska'],['IN','🇮🇳','India','hi','हिन्दी'],['ID','🇮🇩','Indonesia','id','Bahasa Indonesia'],['IR','🇮🇷','Iran','fa','فارسی'],['IQ','🇮🇶','Iraq','ar','العربية'],['IE','🇮🇪','Ireland','en','English'],['IL','🇮🇱','Israel','he','עברית'],['IT','🇮🇹','Italy','it','Italiano'],['JM','🇯🇲','Jamaica','en','English'],['JP','🇯🇵','Japan','ja','日本語'],['JO','🇯🇴','Jordan','ar','العربية'],['KZ','🇰🇿','Kazakhstan','kk','Қазақша'],['KE','🇰🇪','Kenya','en','English'],['KI','🇰🇮','Kiribati','en','English'],['KW','🇰🇼','Kuwait','ar','العربية'],['KG','🇰🇬','Kyrgyzstan','ky','Кыргызча'],['LA','🇱🇦','Laos','lo','ລາວ'],['LV','🇱🇻','Latvia','lv','Latviešu'],['LB','🇱🇧','Lebanon','ar','العربية'],['LS','🇱🇸','Lesotho','en','English'],['LR','🇱🇷','Liberia','en','English'],['LY','🇱🇾','Libya','ar','العربية'],['LI','🇱🇮','Liechtenstein','de','Deutsch'],['LT','🇱🇹','Lithuania','lt','Lietuvių'],['LU','🇱🇺','Luxembourg','fr','Français'],['MG','🇲🇬','Madagascar','fr','Français'],['MW','🇲🇼','Malawi','en','English'],['MY','🇲🇾','Malaysia','ms','Bahasa Melayu'],['MV','🇲🇻','Maldives','dv','ދިވެހި'],['ML','🇲🇱','Mali','fr','Français'],['MT','🇲🇹','Malta','mt','Malti'],['MH','🇲🇭','Marshall Islands','en','English'],['MR','🇲🇷','Mauritania','ar','العربية'],['MU','🇲🇺','Mauritius','en','English'],['MX','🇲🇽','Mexico','es','Español'],['FM','🇫🇲','Micronesia','en','English'],['MD','🇲🇩','Moldova','ro','Română'],['MC','🇲🇨','Monaco','fr','Français'],['MN','🇲🇳','Mongolia','mn','Монгол'],['ME','🇲🇪','Montenegro','sr','Српски'],['MA','🇲🇦','Morocco','ar','العربية'],['MZ','🇲🇿','Mozambique','pt','Português'],['MM','🇲🇲','Myanmar','my','မြန်မာ'],['NA','🇳🇦','Namibia','en','English'],['NR','🇳🇷','Nauru','en','English'],['NP','🇳🇵','Nepal','ne','नेपाली'],['NL','🇳🇱','Netherlands','nl','Nederlands'],['NZ','🇳🇿','New Zealand','en','English'],['NI','🇳🇮','Nicaragua','es','Español'],['NE','🇳🇪','Niger','fr','Français'],['NG','🇳🇬','Nigeria','en','English'],['KP','🇰🇵','North Korea','ko','한국어'],['MK','🇲🇰','North Macedonia','mk','Македонски'],['NO','🇳🇴','Norway','no','Norsk'],['OM','🇴🇲','Oman','ar','العربية'],['PK','🇵🇰','Pakistan','ur','اردو'],['PW','🇵🇼','Palau','en','English'],['PA','🇵🇦','Panama','es','Español'],['PG','🇵🇬','Papua New Guinea','en','English'],['PY','🇵🇾','Paraguay','es','Español'],['PE','🇵🇪','Peru','es','Español'],['PH','🇵🇭','Philippines','en','English'],['PL','🇵🇱','Poland','pl','Polski'],['PT','🇵🇹','Portugal','pt','Português'],['QA','🇶🇦','Qatar','ar','العربية'],['RO','🇷🇴','Romania','ro','Română'],['RU','🇷🇺','Russia','ru','Русский'],['RW','🇷🇼','Rwanda','en','English'],['KN','🇰🇳','Saint Kitts and Nevis','en','English'],['LC','🇱🇨','Saint Lucia','en','English'],['VC','🇻🇨','Saint Vincent and the Grenadines','en','English'],['WS','🇼🇸','Samoa','en','English'],['SM','🇸🇲','San Marino','it','Italiano'],['ST','🇸🇹','Sao Tome and Principe','pt','Português'],['SA','🇸🇦','Saudi Arabia','ar','العربية'],['SN','🇸🇳','Senegal','fr','Français'],['RS','🇷🇸','Serbia','sr','Српски'],['SC','🇸🇨','Seychelles','fr','Français'],['SL','🇸🇱','Sierra Leone','en','English'],['SG','🇸🇬','Singapore','en','English'],['SK','🇸🇰','Slovakia','sk','Slovenčina'],['SI','🇸🇮','Slovenia','sl','Slovenščina'],['SB','🇸🇧','Solomon Islands','en','English'],['SO','🇸🇴','Somalia','so','Soomaali'],['ZA','🇿🇦','South Africa','en','English'],['KR','🇰🇷','South Korea','ko','한국어'],['SS','🇸🇸','South Sudan','en','English'],['ES','🇪🇸','Spain','es','Español'],['LK','🇱🇰','Sri Lanka','si','සිංහල'],['SD','🇸🇩','Sudan','ar','العربية'],['SR','🇸🇷','Suriname','nl','Nederlands'],['SE','🇸🇪','Sweden','sv','Svenska'],['CH','🇨🇭','Switzerland','de','Deutsch'],['SY','🇸🇾','Syria','ar','العربية'],['TJ','🇹🇯','Tajikistan','tg','Тоҷикӣ'],['TZ','🇹🇿','Tanzania','sw','Kiswahili'],['TH','🇹🇭','Thailand','th','ไทย'],['TL','🇹🇱','Timor-Leste','pt','Português'],['TG','🇹🇬','Togo','fr','Français'],['TO','🇹🇴','Tonga','en','English'],['TT','🇹🇹','Trinidad and Tobago','en','English'],['TN','🇹🇳','Tunisia','ar','العربية'],['TR','🇹🇷','Turkey','tr','Türkçe'],['TM','🇹🇲','Turkmenistan','tk','Türkmençe'],['TV','🇹🇻','Tuvalu','en','English'],['UG','🇺🇬','Uganda','en','English'],['UA','🇺🇦','Ukraine','uk','Українська'],['AE','🇦🇪','United Arab Emirates','ar','العربية'],['GB','🇬🇧','United Kingdom','en','English'],['US','🇺🇸','United States','en','English'],['UY','🇺🇾','Uruguay','es','Español'],['UZ','🇺🇿','Uzbekistan','uz','O‘zbekcha'],['VU','🇻🇺','Vanuatu','en','English'],['VA','🇻🇦','Vatican City','it','Italiano'],['VE','🇻🇪','Venezuela','es','Español'],['VN','🇻🇳','Vietnam','vi','Tiếng Việt'],['YE','🇾🇪','Yemen','ar','العربية'],['ZM','🇿🇲','Zambia','en','English'],['ZW','🇿🇼','Zimbabwe','en','English']];
+
+const translations = {
+  en:{title:"Discover What's Worth Exploring.", sub:"Viral moments, technology, sports, entertainment, curious discoveries and more — all in one visual destination.", choose:"🌍 Choose your country", explore:"✨ Explore a topic", reveal:"✨ Reveal", all:"🔥 All Trends", viral:"🚀 Viral", tech:"🤖 AI & Tech", sports:"🏆 Sports", entertainment:"🎬 Entertainment", curious:"🤯 Curious", lifestyle:"✨ Lifestyle", funny:"😂 Funny", science:"🧠 Science", world:"🌎 World", now:"⚡ Trending Now", hot:"🔥 What's Interesting", ready:"Ready to explore?", cta:"Choose any topic and continue to discover interesting content.", exploreNow:"Explore Now →"},
+  bn:{title:"যা জানার মতো, তা আবিষ্কার করুন।",sub:"ভাইরাল মুহূর্ত, প্রযুক্তি, খেলাধুলা, বিনোদন ও কৌতূহলোদ্দীপক বিষয়—সব এক জায়গায়।",choose:"🌍 আপনার দেশ নির্বাচন করুন",explore:"✨ একটি বিষয় বেছে নিন",reveal:"✨ দেখুন",all:"🔥 সব ট্রেন্ড",viral:"🚀 ভাইরাল",tech:"🤖 এআই ও টেক",sports:"🏆 খেলাধুলা",entertainment:"🎬 বিনোদন",curious:"🤯 কৌতূহল",lifestyle:"✨ জীবনধারা",funny:"😂 মজার",science:"🧠 বিজ্ঞান",world:"🌎 বিশ্ব",now:"⚡ এখন ট্রেন্ডিং",hot:"🔥 কী আকর্ষণীয়",ready:"এক্সপ্লোর করতে প্রস্তুত?",cta:"যেকোনো বিষয় বেছে নিয়ে আরও আবিষ্কার করুন।",exploreNow:"এখনই দেখুন →"},
+  hi:{title:"जानिए क्या देखना दिलचस्प है।",sub:"वायरल पल, टेक्नोलॉजी, खेल, मनोरंजन और दिलचस्प खोजें—सब एक जगह।",choose:"🌍 अपना देश चुनें",explore:"✨ विषय चुनें",reveal:"✨ देखें",all:"🔥 सभी ट्रेंड",viral:"🚀 वायरल",tech:"🤖 एआई और टेक",sports:"🏆 खेल",entertainment:"🎬 मनोरंजन",curious:"🤯 जिज्ञासा",lifestyle:"✨ लाइफस्टाइल",funny:"😂 मज़ेदार",science:"🧠 विज्ञान",world:"🌎 दुनिया",now:"⚡ अभी ट्रेंडिंग",hot:"🔥 क्या दिलचस्प है",ready:"एक्सप्लोर करने के लिए तैयार?",cta:"कोई भी विषय चुनें और आगे देखें।",exploreNow:"अभी देखें →"},
+  ar:{title:"اكتشف ما يستحق الاستكشاف.",sub:"لحظات فيروسية، تقنية، رياضة، ترفيه واكتشافات مثيرة للفضول — كلها في مكان واحد.",choose:"🌍 اختر بلدك",explore:"✨ اختر موضوعًا",reveal:"✨ اكتشف",all:"🔥 كل الاتجاهات",viral:"🚀 رائج",tech:"🤖 الذكاء الاصطناعي والتقنية",sports:"🏆 الرياضة",entertainment:"🎬 الترفيه",curious:"🤯 فضول",lifestyle:"✨ أسلوب الحياة",funny:"😂 ممتع",science:"🧠 العلوم",world:"🌎 العالم",now:"⚡ رائج الآن",hot:"🔥 ما المثير؟",ready:"هل أنت مستعد للاستكشاف؟",cta:"اختر أي موضوع وتابع اكتشاف محتوى مثير.",exploreNow:"استكشف الآن →"},
+  es:{title:"Descubre lo que merece la pena explorar.",sub:"Momentos virales, tecnología, deportes, entretenimiento y descubrimientos curiosos, todo en un solo lugar.",choose:"🌍 Elige tu país",explore:"✨ Explora un tema",reveal:"✨ Descubrir",all:"🔥 Tendencias",viral:"🚀 Viral",tech:"🤖 IA y tecnología",sports:"🏆 Deportes",entertainment:"🎬 Entretenimiento",curious:"🤯 Curiosidades",lifestyle:"✨ Estilo de vida",funny:"😂 Divertido",science:"🧠 Ciencia",world:"🌎 Mundo",now:"⚡ Tendencia ahora",hot:"🔥 ¿Qué es interesante?",ready:"¿Listo para explorar?",cta:"Elige un tema y sigue descubriendo contenido interesante.",exploreNow:"Explorar ahora →"},
+  pt:{title:"Descubra o que vale a pena explorar.",sub:"Momentos virais, tecnologia, esportes, entretenimento e descobertas curiosas em um só lugar.",choose:"🌍 Escolha seu país",explore:"✨ Explore um tema",reveal:"✨ Revelar",all:"🔥 Todas as tendências",viral:"🚀 Viral",tech:"🤖 IA e tecnologia",sports:"🏆 Esportes",entertainment:"🎬 Entretenimento",curious:"🤯 Curiosidades",lifestyle:"✨ Estilo de vida",funny:"😂 Divertido",science:"🧠 Ciência",world:"🌎 Mundo",now:"⚡ Em alta agora",hot:"🔥 O que é interessante?",ready:"Pronto para explorar?",cta:"Escolha um tema e continue descobrindo conteúdo interessante.",exploreNow:"Explorar agora →"},
+  fr:{title:"Découvrez ce qui mérite d’être exploré.",sub:"Viral, technologie, sport, divertissement et découvertes étonnantes, réunis au même endroit.",choose:"🌍 Choisissez votre pays",explore:"✨ Explorez un sujet",reveal:"✨ Découvrir",all:"🔥 Toutes les tendances",viral:"🚀 Viral",tech:"🤖 IA et technologie",sports:"🏆 Sport",entertainment:"🎬 Divertissement",curious:"🤯 Curiosités",lifestyle:"✨ Lifestyle",funny:"😂 Amusant",science:"🧠 Science",world:"🌎 Monde",now:"⚡ Tendance maintenant",hot:"🔥 Quoi de passionnant ?",ready:"Prêt à explorer ?",cta:"Choisissez un sujet et continuez à découvrir du contenu intéressant.",exploreNow:"Explorer maintenant →"},
+  de:{title:"Entdecke, was sich zu erkunden lohnt.",sub:"Virale Momente, Technik, Sport, Unterhaltung und faszinierende Entdeckungen – alles an einem Ort.",choose:"🌍 Land auswählen",explore:"✨ Thema entdecken",reveal:"✨ Entdecken",all:"🔥 Alle Trends",viral:"🚀 Viral",tech:"🤖 KI & Technik",sports:"🏆 Sport",entertainment:"🎬 Unterhaltung",curious:"🤯 Kurioses",lifestyle:"✨ Lifestyle",funny:"😂 Lustig",science:"🧠 Wissenschaft",world:"🌎 Welt",now:"⚡ Jetzt im Trend",hot:"🔥 Was ist interessant?",ready:"Bereit zum Entdecken?",cta:"Wähle ein Thema und entdecke interessante Inhalte.",exploreNow:"Jetzt entdecken →"},
+  id:{title:"Temukan hal yang menarik untuk dijelajahi.",sub:"Momen viral, teknologi, olahraga, hiburan, dan penemuan menarik dalam satu tempat.",choose:"🌍 Pilih negara Anda",explore:"✨ Jelajahi topik",reveal:"✨ Lihat",all:"🔥 Semua Tren",viral:"🚀 Viral",tech:"🤖 AI & Teknologi",sports:"🏆 Olahraga",entertainment:"🎬 Hiburan",curious:"🤯 Penasaran",lifestyle:"✨ Gaya Hidup",funny:"😂 Lucu",science:"🧠 Sains",world:"🌎 Dunia",now:"⚡ Sedang Tren",hot:"🔥 Apa yang menarik?",ready:"Siap menjelajah?",cta:"Pilih topik dan lanjutkan menemukan konten menarik.",exploreNow:"Jelajahi Sekarang →"},
+  tr:{title:"Keşfetmeye değer olanı keşfedin.",sub:"Viral anlar, teknoloji, spor, eğlence ve merak uyandıran keşifler tek yerde.",choose:"🌍 Ülkenizi seçin",explore:"✨ Bir konu seçin",reveal:"✨ Keşfet",all:"🔥 Tüm Trendler",viral:"🚀 Viral",tech:"🤖 Yapay Zeka ve Teknoloji",sports:"🏆 Spor",entertainment:"🎬 Eğlence",curious:"🤯 Merak",lifestyle:"✨ Yaşam",funny:"😂 Eğlenceli",science:"🧠 Bilim",world:"🌎 Dünya",now:"⚡ Şimdi Trend",hot:"🔥 Ne ilginç?",ready:"Keşfetmeye hazır mısınız?",cta:"Bir konu seçin ve ilginç içerikleri keşfetmeye devam edin.",exploreNow:"Şimdi Keşfet →"},
+  ru:{title:"Откройте то, что стоит исследовать.",sub:"Вирусные моменты, технологии, спорт, развлечения и удивительные открытия — всё в одном месте.",choose:"🌍 Выберите страну",explore:"✨ Выберите тему",reveal:"✨ Открыть",all:"🔥 Все тренды",viral:"🚀 Вирусное",tech:"🤖 ИИ и технологии",sports:"🏆 Спорт",entertainment:"🎬 Развлечения",curious:"🤯 Любопытное",lifestyle:"✨ Стиль жизни",funny:"😂 Смешное",science:"🧠 Наука",world:"🌎 Мир",now:"⚡ В тренде сейчас",hot:"🔥 Что интересного?",ready:"Готовы исследовать?",cta:"Выберите тему и продолжайте открывать интересный контент.",exploreNow:"Исследовать →"},
+  ja:{title:"今、知りたいことを見つけよう。",sub:"バイラル、テクノロジー、スポーツ、エンタメ、驚きの発見をひとつの場所で。",choose:"🌍 国を選択",explore:"✨ トピックを選ぶ",reveal:"✨ 発見",all:"🔥 すべてのトレンド",viral:"🚀 バイラル",tech:"🤖 AI・テック",sports:"🏆 スポーツ",entertainment:"🎬 エンタメ",curious:"🤯 びっくり",lifestyle:"✨ ライフスタイル",funny:"😂 おもしろ",science:"🧠 科学",world:"🌎 世界",now:"⚡ 今話題",hot:"🔥 気になること",ready:"探す準備はできた？",cta:"テーマを選んで、興味深いコンテンツを探しましょう。",exploreNow:"今すぐ見る →"},
+  ko:{title:"지금 탐험할 만한 것을 발견하세요.",sub:"바이럴, 기술, 스포츠, 엔터테인먼트와 흥미로운 발견을 한곳에서 만나보세요.",choose:"🌍 국가 선택",explore:"✨ 주제 선택",reveal:"✨ 보기",all:"🔥 모든 트렌드",viral:"🚀 바이럴",tech:"🤖 AI & 기술",sports:"🏆 스포츠",entertainment:"🎬 엔터테인먼트",curious:"🤯 호기심",lifestyle:"✨ 라이프스타일",funny:"😂 재미",science:"🧠 과학",world:"🌎 세계",now:"⚡ 지금 트렌드",hot:"🔥 무엇이 흥미로울까요?",ready:"탐험할 준비가 되었나요?",cta:"주제를 선택하고 흥미로운 콘텐츠를 계속 발견하세요.",exploreNow:"지금 탐험 →"},
+  zh:{title:"发现值得探索的内容。",sub:"热门话题、科技、体育、娱乐和有趣发现，一站式探索。",choose:"🌍 选择你的国家",explore:"✨ 探索主题",reveal:"✨ 发现",all:"🔥 全部趋势",viral:"🚀 热门",tech:"🤖 AI与科技",sports:"🏆 体育",entertainment:"🎬 娱乐",curious:"🤯 好奇",lifestyle:"✨ 生活方式",funny:"😂 趣味",science:"🧠 科学",world:"🌎 世界",now:"⚡ 正在流行",hot:"🔥 有什么有趣的？",ready:"准备好探索了吗？",cta:"选择一个主题，继续发现有趣内容。",exploreNow:"立即探索 →"},
+  ur:{title:"جانیں کہ کیا دریافت کرنا دلچسپ ہے۔",sub:"وائرل لمحات، ٹیکنالوجی، کھیل، تفریح اور دلچسپ دریافتیں ایک جگہ۔",choose:"🌍 اپنا ملک منتخب کریں",explore:"✨ موضوع منتخب کریں",reveal:"✨ دیکھیں",all:"🔥 تمام ٹرینڈز",viral:"🚀 وائرل",tech:"🤖 اے آئی اور ٹیک",sports:"🏆 کھیل",entertainment:"🎬 تفریح",curious:"🤯 دلچسپ",lifestyle:"✨ لائف اسٹائل",funny:"😂 مزاحیہ",science:"🧠 سائنس",world:"🌎 دنیا",now:"⚡ ابھی ٹرینڈنگ",hot:"🔥 کیا دلچسپ ہے؟",ready:"دریافت کے لیے تیار ہیں؟",cta:"کوئی بھی موضوع منتخب کریں اور مزید دلچسپ مواد دیکھیں۔",exploreNow:"ابھی دیکھیں →"}
+};
+
+const select = document.getElementById("countrySelect");
+const langChip = document.getElementById("langChip");
+const localeLabel = document.getElementById("localeLabel");
+
+countries.sort((a,b)=>a[2].localeCompare(b[2])).forEach(c=>{
+  const o=document.createElement("option");
+  o.value=c[0]; o.textContent=`${c[1]} ${c[2]} — ${c[4]}`;
+  select.appendChild(o);
+});
+
+function getTranslation(lang){ return translations[lang] || translations.en; }
+
+function setLanguage(code){
+  const c=countries.find(x=>x[0]===code);
+  if(!c) return;
+  const lang=c[3], t=getTranslation(lang);
+  document.documentElement.lang=lang;
+  document.body.classList.toggle("direction-rtl",["ar","fa","ur","he"].includes(lang));
+
+  const title=document.querySelector("h1");
+  if(title) title.innerHTML = t.title.replace(" — ","<br>");
+  const heroP=document.querySelector(".hero > p");
+  if(heroP) heroP.textContent=t.sub;
+  localeLabel.textContent=t.choose;
+  langChip.textContent=`Language: ${c[4]}`;
+
+  const panelTitle=document.querySelector(".panel-title");
+  if(panelTitle) panelTitle.textContent=t.explore;
+
+  const labels=[t.reveal,t.all,t.viral,t.tech,t.sports,t.entertainment,t.curious,t.lifestyle,t.funny,t.science,t.world,t.now];
+  document.querySelectorAll(".buttons .btn").forEach((el,i)=>{
+    const icon=el.querySelector(".icon");
+    // Buttons do not have separate icon spans in this version; preserve emoji by replacing text only.
+    const emojis=["✨","🔥","🚀","🤖","🏆","🎬","🤯","✨","😂","🧠","🌎","⚡"];
+    el.textContent=`${emojis[i]} ${labels[i]}`;
+  });
+
+  const hot=document.querySelector(".head h2");
+  if(hot) hot.textContent=t.hot;
+  const ready=document.querySelector(".bottom h2");
+  if(ready) ready.textContent=t.ready;
+  const bottomP=document.querySelector(".bottom p");
+  if(bottomP) bottomP.textContent=t.cta;
+  const cta=document.querySelector(".maincta");
+  if(cta) cta.textContent=t.exploreNow;
+
+  try{localStorage.setItem("gth-country",code)}catch(e){}
+}
+
+select.addEventListener("change",()=>setLanguage(select.value));
+
+let saved=null;
+try{saved=localStorage.getItem("gth-country")}catch(e){}
+const defaultCountry=saved && countries.some(c=>c[0]===saved) ? saved : "US";
+select.value=defaultCountry;
+setLanguage(defaultCountry);
+</script>
+
+
+<script>
+const LOCAL_PULSE={"BD": [["🇧🇩 Bangladesh Now", "Local conversations", "Entertainment, cricket, creators and public-interest topics people are discussing.", "Explore Bangladesh"], ["🏏 Cricket", "Sports pulse", "Match reactions, players and cricket conversations.", "Explore cricket"], ["📱 Internet", "Digital life", "Viral clips, creators and social-media conversations.", "Explore viral"]], "IN": [["🇮🇳 India Now", "Hot conversations", "Entertainment, sports, technology and public-interest stories people are discussing.", "Explore India"], ["🎬 Entertainment", "People & pop culture", "Celebrity moments, new releases and conversations around public figures.", "Explore entertainment"], ["🏏 Cricket", "Sports pulse", "Big performances, match reactions and cricket debates.", "Explore cricket"]], "US": [["🇺🇸 USA Now", "Hot conversations", "Entertainment, technology, sports and internet culture.", "Explore USA"], ["🤖 Tech", "Technology pulse", "AI, gadgets and digital products attracting attention.", "Explore tech"], ["🏈 Sports", "Sports pulse", "Big games, athletes and fan conversations.", "Explore sports"]], "GB": [["🇬🇧 UK Now", "Hot conversations", "Culture, entertainment, sport and technology topics.", "Explore UK"], ["⚽ Football", "Sports pulse", "Match reactions, players and football conversations.", "Explore football"], ["🎬 Culture", "Entertainment", "TV, music and public figures attracting attention.", "Explore culture"]], "SA": [["🇸🇦 Saudi Arabia Now", "Local conversations", "Entertainment, sport, technology and cultural topics.", "Explore Saudi"], ["⚽ Sports", "Sports pulse", "Football, major events and athlete conversations.", "Explore sports"], ["🎬 Entertainment", "Culture pulse", "Events, creators and entertainment topics.", "Explore entertainment"]], "AE": [["🇦🇪 UAE Now", "Local conversations", "Technology, lifestyle, business and entertainment.", "Explore UAE"], ["🚀 Innovation", "Tech pulse", "AI, startups and future-facing technology.", "Explore innovation"], ["✨ Lifestyle", "City life", "Travel, events and lifestyle conversations.", "Explore lifestyle"]], "PK": [["🇵🇰 Pakistan Now", "Local conversations", "Entertainment, cricket, creators and technology.", "Explore Pakistan"], ["🏏 Cricket", "Sports pulse", "Players, matches and fan reactions.", "Explore cricket"], ["🎬 Entertainment", "Pop culture", "Actors, dramas, music and creator conversations.", "Explore entertainment"]], "ID": [["🇮🇩 Indonesia Now", "Local conversations", "Creators, entertainment, sport and technology.", "Explore Indonesia"], ["📱 Viral", "Internet pulse", "Short-video trends and creator conversations.", "Explore viral"], ["⚽ Sports", "Sports pulse", "Football and major sporting moments.", "Explore sports"]], "BR": [["🇧🇷 Brasil Agora", "Conversas em alta", "Entretenimento, futebol, tecnologia e cultura digital.", "Explorar Brasil"], ["⚽ Futebol", "Esportes", "Jogadores, partidas e reações dos torcedores.", "Explorar futebol"], ["🎵 Música", "Cultura", "Música, artistas e assuntos populares.", "Explorar música"]], "JP": [["🇯🇵 Japan Now", "Hot conversations", "Technology, entertainment, gaming and culture.", "Explore Japan"], ["🎮 Gaming", "Game pulse", "Games, releases and gaming culture.", "Explore gaming"], ["🤖 Tech", "Technology pulse", "AI, gadgets and future technology.", "Explore tech"]], "KR": [["🇰🇷 Korea Now", "Hot conversations", "Entertainment, gaming, technology and culture.", "Explore Korea"], ["🎬 K-Culture", "Entertainment", "Music, shows, creators and public figures.", "Explore K-Culture"], ["🤖 Tech", "Technology", "AI, devices and digital trends.", "Explore tech"]]};
+const PULSE_IMAGES=[
+"https://images.unsplash.com/photo-1521292270410-a8c4d716a518?auto=format&fit=crop&w=1200&q=80",
+"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
+"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80"
+];
+function renderPulse(code){
+ const c=countries.find(x=>x[0]===code);
+ const list=LOCAL_PULSE[code]||[
+  [c?c[1]+" "+c[2]:"🌍 Worldwide","Local discovery","Explore entertainment, sport, technology and internet culture connected to your selected country.","Explore local topics"],
+  ["🤖 Technology","Tech pulse","AI, gadgets, science and digital culture.","Explore tech"],
+  ["🎬 Entertainment","Culture pulse","Movies, music, creators and public figures.","Explore entertainment"]
+ ];
+ document.getElementById("pulseTitle").textContent="🔥 "+(c?c[2]:"Local")+" Pulse";
+ document.getElementById("pulseSubtitle").textContent="Topics selected for visitors from "+(c?c[2]:"your country")+".";
+ document.getElementById("pulseCountry").textContent=c?c[1]+" "+c[2]:"Worldwide";
+ document.getElementById("pulseGrid").innerHTML=list.map((x,i)=>'<a class="'+(i===0?'story':'mini-story')+'" href="https://www.profitableratecpmnetwork.com/xqfw46rbp9?key=c6a8fffa03795a7894bdac7c44bcd315" target="_blank" rel="nofollow sponsored noopener"><div class="story-bg" style="background-image:url('+PULSE_IMAGES[i]+')"></div><div class="story-shade"></div><div class="story-content"><div class="story-kicker">'+x[0]+'</div><h3>'+x[2]+'</h3><p>'+x[1]+'</p><span class="story-btn">'+x[3]+' →</span></div></a>').join("");
+}
+const oldLanguage=setLanguage;
+setLanguage=function(code){oldLanguage(code);renderPulse(code);};
+renderPulse(select.value);
+</script>
+
+
+<script>
+const PEOPLE={
+football:[
+["Lionel Messi","Argentina • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Lionel%20Messi%202022.jpg"],
+["Cristiano Ronaldo","Portugal • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Cristiano%20Ronaldo%202018.jpg"],
+["Kylian Mbappé","France • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Kylian%20Mbappe%202019.jpg"],
+["Neymar","Brazil • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Neymar%202018.jpg"],
+["Erling Haaland","Norway • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Erling%20Haaland%202022.jpg"],
+["Jude Bellingham","England • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Jude%20Bellingham%202022.jpg"],
+["Mohamed Salah","Egypt • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Mohamed%20Salah%202021.jpg"],
+["Vinícius Júnior","Brazil • Football","https://commons.wikimedia.org/wiki/Special:FilePath/Vinicius%20Junior%202022.jpg"]
+],
+cricket:[
+["Virat Kohli","India • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Virat%20Kohli%202019.jpg"],
+["Babar Azam","Pakistan • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Babar%20Azam%202021.jpg"],
+["Shakib Al Hasan","Bangladesh • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Shakib%20Al%20Hasan%202018.jpg"],
+["Ben Stokes","England • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Ben%20Stokes%202021.jpg"],
+["Joe Root","England • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Joe%20Root%202020.jpg"],
+["Rohit Sharma","India • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Rohit%20Sharma%202019.jpg"],
+["Jasprit Bumrah","India • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Jasprit%20Bumrah%202023.jpg"],
+["Kane Williamson","New Zealand • Cricket","https://commons.wikimedia.org/wiki/Special:FilePath/Kane%20Williamson%202019.jpg"]
+],
+actors:[
+["Tom Cruise","USA • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Tom%20Cruise%20by%20Gage%20Skidmore%202012.jpg"],
+["Dwayne Johnson","USA • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Dwayne%20Johnson%20by%20Gage%20Skidmore%202016.jpg"],
+["Robert Downey Jr.","USA • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Robert%20Downey%20Jr.%202022.jpg"],
+["Shah Rukh Khan","India • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Shah%20Rukh%20Khan%20at%20the%20opening%20ceremony%20of%20the%20IFFI%202007.jpg"],
+["Aamir Khan","India • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Aamir%20Khan%20at%20the%20Jagran%20Film%20Festival%202017.jpg"],
+["Priyanka Chopra","India • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Priyanka%20Chopra%20at%20the%20UNICEF%20Goodwill%20Ambassadors%20Event%202018.jpg"],
+["Jackie Chan","Hong Kong • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Jackie%20Chan%20Cannes%202012.jpg"],
+["Leonardo DiCaprio","USA • Actor","https://commons.wikimedia.org/wiki/Special:FilePath/Leonardo%20DiCaprio%202016.jpg"]
+]};
+function renderPeople(type){
+ const grid=document.getElementById("peopleGrid"); if(!grid)return;
+ grid.innerHTML=PEOPLE[type].map(p=>`<a class="person-card" href="${SMARTLINK}" target="_blank" rel="nofollow sponsored noopener"><img src="${p[2]}" alt="${p[0]}" loading="lazy" onerror="this.style.display='none'"><div class="person-info"><div class="person-name">${p[0]}</div><div class="person-meta">${p[1]}</div></div></a>`).join("");
+}
+document.querySelectorAll(".people-tab").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".people-tab").forEach(x=>x.classList.remove("active"));
+ btn.classList.add("active"); renderPeople(btn.dataset.type);
+}));
+renderPeople("football");
+</script>
+
+</body>
+</html>
